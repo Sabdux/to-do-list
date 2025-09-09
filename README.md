@@ -7,7 +7,7 @@ Esta é uma aplicação simples de "Lista de Tarefas" (To-Do List) desenvolvida 
 Funcionalidades:
 - Adicionar novas tarefas a uma lista.
 - Visualizar todas as tarefas cadastradas.
-- Marcar e desmarcar uma tarefa como concluída, com um efeito visual de texto riscado.
+- Marcar e desmarcar uma tarefa como concluída, com um efeito visual de checkbox.
 
 ## Tecnologias Utilizadas
 
@@ -38,9 +38,9 @@ O estado da aplicação é gerenciado utilizando o Hook `useState` do React.
     ```typescript
     // Em App.tsx
     import { useState } from 'react';
-    import { Task } from './types'; // Supondo uma definição de tipo
+    import type { Tarefa } from './types';
 
-    const [tasks, setTasks] = useState<Task[]>([]);
+    const [tasks, setTasks] = useState<Tarefa[]>([]);
     ```
 
     A função `setTasks` é usada para adicionar novas tarefas ou para atualizar o estado de uma tarefa existente (marcar como concluída).
@@ -67,15 +67,15 @@ O estado da aplicação é gerenciado utilizando o Hook `useState` do React.
 
 O TypeScript foi utilizado para garantir a segurança dos tipos em toda a aplicação. A principal estrutura de dados, a tarefa, foi tipada usando uma `interface`.
 
-**Interface `Task`**:
-Esta interface define o formato de um objeto de tarefa, garantindo que cada tarefa tenha um `id`, um `text` e um status `completed`.
+**Interface `Tarefa`**:
+Esta interface define o formato de um objeto de tarefa, garantindo que cada tarefa tenha um `id`, um `texto` e um status `completo`.
 
 ```typescript
 // Em App.tsx
-export interface Task {
+export interface Tarefa {
   id: number;
-  text: string;
-  completed: boolean;
+  texto: string;
+  completo: boolean;
 }
 ```
 
@@ -86,7 +86,7 @@ Essa interface é então utilizada para tipar os estados e as `props` dos compon
 ```typescript
 // Em TodoList/index.tsx
 interface TodoListProps {
-  tasks: Task[]; // Usando a interface para tipar o array
+  tasks: Tarefa[]; // Usando a interface para tipar o array
   onToggleTask: (taskId: number) => void;
 }
 ```
